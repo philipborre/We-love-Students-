@@ -1,3 +1,4 @@
+
 <style>
   .wls-wrap *, .wls-wrap *::before, .wls-wrap *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -271,8 +272,12 @@
       <div class="wls-pill">Pilotfase pågår</div>
       <h2>Vær klar fra dag én</h2>
       <p>Vi velger ut partnere og studenter frem mot lansering. Meld interesse nå — vi tar kontakt personlig.</p>
-      <form class="wls-email-form" onsubmit="wlsSubmitCta(event)">
-        <input type="email" id="wls-cta-email" placeholder="din@epost.no" required>
+      <form class="wls-email-form" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="f8b67a7c-79b9-408c-a16d-8449a312bf64">
+        <input type="hidden" name="subject" value="Ny påmelding — WeLoveStudents">
+        <input type="hidden" name="from_name" value="WeLoveStudents">
+        <input type="hidden" name="redirect" value="https://we-love-students.vercel.app?success=true">
+        <input type="email" name="email" placeholder="din@epost.no" required>
         <button type="submit">Meld interesse</button>
       </form>
       <p class="wls-form-note">For studenter og butikker. Maks 20 minutter av din tid.</p>
@@ -296,14 +301,5 @@ function wlsTab(tab, btn) {
   btn.classList.add('active');
   document.getElementById('wls-panel-' + tab).classList.add('active');
 }
-function wlsSubmitHero(e) {
-  e.preventDefault();
-  document.getElementById('wls-hero-success').style.display = 'block';
-  document.getElementById('wls-hero-email').value = '';
-}
-function wlsSubmitCta(e) {
-  e.preventDefault();
-  document.getElementById('wls-cta-success').style.display = 'block';
-  document.getElementById('wls-cta-email').value = '';
-}
+if(window.location.search.includes('success=true')){document.querySelectorAll('.wls-success').forEach(function(el){el.style.display='block'})}
 </script>
