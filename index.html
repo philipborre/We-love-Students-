@@ -149,7 +149,7 @@
         <path d="M22 12 Q36 18 34 24" stroke="#1D9E75" stroke-width="1.5" fill="none" stroke-dasharray="3 2"/>
       </svg>
     </div>
-    <div class="wls-pill">Lanseres i Norge — 2026</div>
+    <div class="wls-pill">Lanseres i Norge — 2025</div>
     <h1>Studentrabatt — <em>automatisk</em>,<br>direkte på bankkortet</h1>
     <p>WeLoveStudents gir studenter cashback hos partnerbutikker uten app-styr eller kuponger. Bruk ditt vanlige bankkort — pengene kommer tilbake.</p>
     <div class="wls-stats">
@@ -157,11 +157,11 @@
       <div class="wls-stat"><div class="wls-stat-num green">4–6×</div><div class="wls-stat-label">kjøpekraft via familien</div></div>
       <div class="wls-stat"><div class="wls-stat-num">0 kr</div><div class="wls-stat-label">kostnad å starte</div></div>
     </div>
-    <form class="wls-email-form" action="https://api.web3forms.com/submit" method="POST" onsubmit="wlsShowSuccess('wls-hero-success')">
+    <form class="wls-email-form" action="https://api.web3forms.com/submit" method="POST">
       <input type="hidden" name="access_key" value="f8b67a7c-79b9-408c-a16d-8449a312bf64">
       <input type="hidden" name="subject" value="Ny påmelding — WeLoveStudents">
       <input type="hidden" name="from_name" value="WeLoveStudents">
-      <input type="hidden" name="redirect" value="https://we-love-students.vercel.app">
+      <input type="hidden" name="redirect" value="https://we-love-students.vercel.app?success=true">
       <input type="email" name="email" placeholder="din@epost.no" required>
       <button type="submit">Meld interesse</button>
     </form>
