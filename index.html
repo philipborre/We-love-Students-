@@ -1,536 +1,309 @@
-<!DOCTYPE html>
-<html lang="no">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WeLoveStudents — Cashback for studenter og familien</title>
-<meta name="description" content="WeLoveStudents gir studenter automatisk cashback hos partnerbutikker — og lar hele familien handle på vegne av studenten. Lanseres i Norge 2026.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  .wls-wrap *, .wls-wrap *::before, .wls-wrap *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --navy: #042C53;
-    --blue-dark: #0C447C;
-    --blue-mid: #185FA5;
-    --blue-light: #378ADD;
-    --blue-surface: #E6F1FB;
-    --green: #1D9E75;
-    --green-light: #5DCAA5;
-    --green-surface: #E1F5EE;
-    --text-main: #042C53;
-    --text-muted: #5a6e82;
-    --border: rgba(4, 44, 83, 0.12);
-    --bg: #f7fafd;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text-main);
+  .wls-wrap {
+    font-family: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+    color: #042C53;
     font-size: 16px;
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
-  }
-
-  /* NAV */
-  nav {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(247, 250, 253, 0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 0.5px solid var(--border);
-    padding: 0 2rem;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-  .nav-wordmark { font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 15px; color: var(--navy); letter-spacing: 0.01em; }
-  .nav-cta {
-    background: var(--navy);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 8px 18px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background 0.15s;
-  }
-  .nav-cta:hover { background: var(--blue-dark); }
-
-  /* HERO */
-  .hero {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 5rem 2rem 4rem;
-    text-align: center;
-  }
-  .pill {
-    display: inline-block;
-    background: var(--blue-surface);
-    color: var(--blue-dark);
-    font-size: 12px;
-    font-weight: 500;
-    padding: 5px 14px;
-    border-radius: 20px;
-    margin-bottom: 1.5rem;
-    letter-spacing: 0.04em;
-  }
-  .hero h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(32px, 5vw, 50px);
-    font-weight: 400;
-    color: var(--navy);
-    line-height: 1.15;
-    margin-bottom: 1.25rem;
-  }
-  .hero h1 em { font-style: italic; color: var(--green); }
-  .hero p {
-    font-size: 17px;
-    color: var(--text-muted);
-    max-width: 480px;
-    margin: 0 auto 2.5rem;
-  }
-
-  /* LOGO NODE */
-  .logo-nodes { display: inline-block; margin-bottom: 1.5rem; }
-
-  /* STATS */
-  .stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    max-width: 540px;
-    margin: 0 auto 3rem;
-  }
-  .stat {
-    background: white;
-    border: 0.5px solid var(--border);
-    border-radius: 12px;
-    padding: 1.25rem 1rem;
-    text-align: center;
-  }
-  .stat-num {
-    font-family: 'DM Serif Display', serif;
-    font-size: 26px;
-    color: var(--navy);
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-  .stat-num.green { color: var(--green); }
-  .stat-label { font-size: 12px; color: var(--text-muted); }
-
-  /* EMAIL CTA */
-  .email-form {
-    display: flex;
-    gap: 8px;
-    max-width: 420px;
+    max-width: 800px;
     margin: 0 auto;
   }
-  .email-form input {
-    flex: 1;
-    height: 46px;
-    border: 0.5px solid var(--border);
-    border-radius: 8px;
-    padding: 0 14px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    background: white;
-    color: var(--text-main);
-    outline: none;
-    transition: border-color 0.15s;
-  }
-  .email-form input:focus { border-color: var(--blue-mid); }
-  .email-form input::placeholder { color: #aab8c5; }
-  .email-form button {
-    height: 46px;
-    background: var(--green);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 0 20px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: background 0.15s;
-  }
-  .email-form button:hover { background: #0F6E56; }
-  .form-note { font-size: 12px; color: var(--text-muted); margin-top: 10px; }
-  .success { color: var(--green); font-size: 14px; margin-top: 10px; display: none; }
 
-  /* DIVIDER */
-  hr { border: none; border-top: 0.5px solid var(--border); margin: 0; }
-
-  /* SECTIONS */
-  section { max-width: 720px; margin: 0 auto; padding: 4rem 2rem; }
-  .section-eyebrow { font-size: 12px; font-weight: 500; color: var(--blue-mid); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.5rem; }
-  .section-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(22px, 3.5vw, 30px);
-    font-weight: 400;
-    color: var(--navy);
-    margin-bottom: 0.75rem;
-    line-height: 1.25;
+  .wls-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 2rem; border-bottom: 1px solid rgba(4,44,83,0.1);
+    background: rgba(247,250,253,0.95);
+    position: sticky; top: 0; z-index: 100;
   }
-  .section-lead { font-size: 16px; color: var(--text-muted); max-width: 520px; margin-bottom: 2rem; }
-
-  /* TABS */
-  .tabs { display: flex; gap: 8px; margin-bottom: 2rem; }
-  .tab {
-    padding: 7px 18px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    border-radius: 20px;
-    border: 0.5px solid var(--border);
-    background: transparent;
-    color: var(--text-muted);
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-  .tab.active { background: var(--navy); color: white; border-color: var(--navy); }
-  .tab:hover:not(.active) { background: var(--blue-surface); color: var(--blue-dark); border-color: var(--blue-light); }
-
-  /* PANELS */
-  .panel { display: none; }
-  .panel.active { display: block; }
-
-  /* CARD GRID */
-  .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .card {
-    background: white;
-    border: 0.5px solid var(--border);
-    border-radius: 12px;
-    padding: 1.25rem;
-    transition: border-color 0.15s;
-  }
-  .card:hover { border-color: var(--blue-light); }
-  .card-icon {
-    width: 36px; height: 36px;
-    background: var(--blue-surface);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 0.75rem;
-  }
-  .card-icon svg { width: 18px; height: 18px; stroke: var(--blue-mid); fill: none; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
-  .card-icon.g { background: var(--green-surface); }
-  .card-icon.g svg { stroke: var(--green); }
-  .card h3 { font-size: 14px; font-weight: 500; color: var(--navy); margin-bottom: 4px; }
-  .card p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
-  .card.wide { grid-column: 1 / -1; }
-  .highlight { color: var(--green); font-weight: 500; }
-
-  /* HOW IT WORKS */
-  .steps { display: flex; flex-direction: column; gap: 0; }
-  .step { display: flex; gap: 1.5rem; padding: 1.5rem 0; border-bottom: 0.5px solid var(--border); }
-  .step:last-child { border-bottom: none; }
-  .step-num {
-    font-family: 'DM Serif Display', serif;
-    font-size: 28px;
-    color: var(--blue-surface);
-    line-height: 1;
-    min-width: 32px;
-    padding-top: 2px;
-  }
-  .step-content h3 { font-size: 15px; font-weight: 500; color: var(--navy); margin-bottom: 4px; }
-  .step-content p { font-size: 14px; color: var(--text-muted); }
-
-  /* DARK CTA SECTION */
-  .cta-section {
-    background: var(--navy);
-    padding: 5rem 2rem;
-  }
-  .cta-inner {
-    max-width: 560px;
-    margin: 0 auto;
-    text-align: center;
-  }
-  .cta-inner .pill { background: rgba(255,255,255,0.1); color: #85B7EB; }
-  .cta-inner h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(24px, 4vw, 36px);
-    font-weight: 400;
-    color: white;
-    line-height: 1.2;
-    margin-bottom: 1rem;
-  }
-  .cta-inner p { color: #85B7EB; font-size: 16px; margin-bottom: 2rem; }
-  .cta-inner .email-form input {
-    background: #0C447C;
-    border-color: #185FA5;
-    color: white;
-  }
-  .cta-inner .email-form input::placeholder { color: #378ADD; }
-  .cta-inner .form-note { color: #378ADD; }
-  .cta-inner .success { color: var(--green-light); }
-
-  /* CONTACT */
-  .contact { text-align: center; padding: 3rem 2rem; }
-  .contact p { font-size: 14px; color: var(--text-muted); }
-  .contact a { color: var(--blue-mid); text-decoration: none; }
-  .contact a:hover { text-decoration: underline; }
-
-  /* FOOTER */
-  footer {
-    border-top: 0.5px solid var(--border);
-    padding: 1.5rem 2rem;
-    text-align: center;
-    font-size: 12px;
-    color: var(--text-muted);
+  .wls-nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .wls-nav-wordmark { font-size: 15px; font-weight: 500; color: #042C53; }
+  .wls-nav-cta {
+    background: #042C53; color: white; border: none; border-radius: 8px;
+    padding: 8px 18px; font-size: 14px; font-weight: 500; cursor: pointer;
+    text-decoration: none; display: inline-block;
   }
 
-  /* RESPONSIVE */
+  .wls-hero { max-width: 680px; margin: 0 auto; padding: 4rem 2rem 3rem; text-align: center; }
+  .wls-pill {
+    display: inline-block; background: #E6F1FB; color: #0C447C;
+    font-size: 12px; font-weight: 500; padding: 5px 14px;
+    border-radius: 20px; margin-bottom: 1.5rem; letter-spacing: 0.04em;
+  }
+  .wls-hero h1 {
+    font-size: clamp(28px, 5vw, 46px); font-weight: 500; color: #042C53;
+    line-height: 1.15; margin-bottom: 1.25rem;
+  }
+  .wls-hero h1 em { font-style: italic; color: #1D9E75; }
+  .wls-hero > p { font-size: 17px; color: #5a6e82; max-width: 480px; margin: 0 auto 2.5rem; }
+
+  .wls-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 540px; margin: 0 auto 2.5rem; }
+  .wls-stat { background: white; border: 1px solid rgba(4,44,83,0.1); border-radius: 12px; padding: 1.25rem 1rem; text-align: center; }
+  .wls-stat-num { font-size: 26px; font-weight: 600; color: #042C53; line-height: 1; margin-bottom: 4px; }
+  .wls-stat-num.green { color: #1D9E75; }
+  .wls-stat-label { font-size: 12px; color: #5a6e82; }
+
+  .wls-email-form { display: flex; gap: 8px; max-width: 420px; margin: 0 auto; }
+  .wls-email-form input {
+    flex: 1; height: 46px; border: 1px solid rgba(4,44,83,0.15); border-radius: 8px;
+    padding: 0 14px; font-size: 14px; background: white; color: #042C53; outline: none;
+  }
+  .wls-email-form button {
+    height: 46px; background: #1D9E75; color: white; border: none; border-radius: 8px;
+    padding: 0 20px; font-size: 14px; font-weight: 500; cursor: pointer; white-space: nowrap;
+  }
+  .wls-form-note { font-size: 12px; color: #5a6e82; margin-top: 10px; }
+  .wls-success { color: #1D9E75; font-size: 14px; margin-top: 10px; display: none; }
+
+  .wls-hr { border: none; border-top: 1px solid rgba(4,44,83,0.1); margin: 0; }
+
+  .wls-section { max-width: 680px; margin: 0 auto; padding: 3.5rem 2rem; }
+  .wls-eyebrow { font-size: 12px; font-weight: 500; color: #185FA5; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.5rem; }
+  .wls-section-title { font-size: clamp(20px, 3vw, 28px); font-weight: 500; color: #042C53; margin-bottom: 0.75rem; line-height: 1.25; }
+  .wls-section-lead { font-size: 16px; color: #5a6e82; max-width: 520px; margin-bottom: 2rem; }
+
+  .wls-tabs { display: flex; gap: 8px; margin-bottom: 2rem; }
+  .wls-tab {
+    padding: 7px 18px; font-size: 13px; font-weight: 500; border-radius: 20px;
+    border: 1px solid rgba(4,44,83,0.15); background: transparent;
+    color: #5a6e82; cursor: pointer; transition: all 0.15s;
+  }
+  .wls-tab.active { background: #042C53; color: white; border-color: #042C53; }
+
+  .wls-panel { display: none; }
+  .wls-panel.active { display: block; }
+
+  .wls-card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .wls-card {
+    background: white; border: 1px solid rgba(4,44,83,0.1);
+    border-radius: 12px; padding: 1.25rem;
+  }
+  .wls-card-icon {
+    width: 36px; height: 36px; background: #E6F1FB; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem;
+  }
+  .wls-card-icon svg { width: 18px; height: 18px; stroke: #185FA5; fill: none; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+  .wls-card-icon.g { background: #E1F5EE; }
+  .wls-card-icon.g svg { stroke: #1D9E75; }
+  .wls-card h3 { font-size: 14px; font-weight: 500; color: #042C53; margin-bottom: 4px; }
+  .wls-card p { font-size: 13px; color: #5a6e82; line-height: 1.6; }
+  .wls-card.wide { grid-column: 1 / -1; }
+  .wls-highlight { color: #1D9E75; font-weight: 500; }
+
+  .wls-steps { display: flex; flex-direction: column; }
+  .wls-step { display: flex; gap: 1.5rem; padding: 1.5rem 0; border-bottom: 1px solid rgba(4,44,83,0.1); }
+  .wls-step:last-child { border-bottom: none; }
+  .wls-step-num { font-size: 28px; font-weight: 300; color: #B5D4F4; line-height: 1; min-width: 32px; padding-top: 2px; }
+  .wls-step-content h3 { font-size: 15px; font-weight: 500; color: #042C53; margin-bottom: 4px; }
+  .wls-step-content p { font-size: 14px; color: #5a6e82; }
+
+  .wls-cta-section { background: #042C53; padding: 4rem 2rem; }
+  .wls-cta-inner { max-width: 560px; margin: 0 auto; text-align: center; }
+  .wls-cta-inner .wls-pill { background: rgba(255,255,255,0.1); color: #85B7EB; }
+  .wls-cta-inner h2 { font-size: clamp(22px, 3.5vw, 32px); font-weight: 500; color: white; line-height: 1.2; margin-bottom: 1rem; }
+  .wls-cta-inner > p { color: #85B7EB; font-size: 16px; margin-bottom: 2rem; }
+  .wls-cta-inner .wls-email-form input { background: #0C447C; border-color: #185FA5; color: white; }
+  .wls-cta-inner .wls-email-form input::placeholder { color: #378ADD; }
+  .wls-cta-inner .wls-form-note { color: #378ADD; }
+  .wls-cta-inner .wls-success { color: #5DCAA5; }
+
+  .wls-contact { text-align: center; padding: 2.5rem 2rem; }
+  .wls-contact p { font-size: 14px; color: #5a6e82; }
+  .wls-contact a { color: #185FA5; text-decoration: none; }
+
+  .wls-footer { border-top: 1px solid rgba(4,44,83,0.1); padding: 1.5rem 2rem; text-align: center; font-size: 12px; color: #5a6e82; }
+
   @media (max-width: 540px) {
-    .card-grid { grid-template-columns: 1fr; }
-    .stats { grid-template-columns: 1fr 1fr; }
-    .stats .stat:last-child { grid-column: 1 / -1; }
-    .email-form { flex-direction: column; }
-    .step { gap: 1rem; }
+    .wls-card-grid { grid-template-columns: 1fr; }
+    .wls-stats { grid-template-columns: 1fr 1fr; }
+    .wls-email-form { flex-direction: column; }
   }
-
-  /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  .hero > * { animation: fadeUp 0.5s ease both; }
-  .hero .logo-nodes { animation-delay: 0s; }
-  .hero .pill { animation-delay: 0.05s; }
-  .hero h1 { animation-delay: 0.1s; }
-  .hero p  { animation-delay: 0.15s; }
-  .hero .stats { animation-delay: 0.2s; }
-  .hero .email-form { animation-delay: 0.25s; }
-  .hero .form-note { animation-delay: 0.3s; }
 </style>
-</head>
-<body>
 
-<!-- NAV -->
-<nav>
-  <a href="/" class="nav-logo">
-    <svg width="36" height="30" viewBox="0 0 44 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="22" cy="7" r="5" fill="#1D9E75"/>
-      <circle cx="10" cy="28" r="4" fill="#185FA5"/>
-      <circle cx="34" cy="28" r="4" fill="#185FA5"/>
-      <path d="M22 12 Q8 18 10 24" stroke="#1D9E75" stroke-width="1.5" fill="none"/>
-      <path d="M22 12 Q36 18 34 24" stroke="#1D9E75" stroke-width="1.5" fill="none" stroke-dasharray="3 2"/>
-    </svg>
-    <span class="nav-wordmark">WeLoveStudents</span>
-  </a>
-  <a href="#interesse" class="nav-cta">Meld interesse</a>
-</nav>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
 
-<!-- HERO -->
-<div class="hero">
-  <div class="logo-nodes">
-    <svg width="64" height="52" viewBox="0 0 44 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="22" cy="7" r="5" fill="#1D9E75"/>
-      <circle cx="10" cy="28" r="4" fill="#185FA5"/>
-      <circle cx="34" cy="28" r="4" fill="#185FA5"/>
-      <path d="M22 12 Q8 18 10 24" stroke="#1D9E75" stroke-width="1.5" fill="none"/>
-      <path d="M22 12 Q36 18 34 24" stroke="#1D9E75" stroke-width="1.5" fill="none" stroke-dasharray="3 2"/>
-    </svg>
-  </div>
-  <div class="pill">Lanseres i Norge — 2025</div>
-  <h1>Studentrabatt — <em>automatisk</em>,<br>direkte på bankkortet</h1>
-  <p>WeLoveStudents gir studenter cashback hos partnerbutikker uten app-styr eller kuponger. Bruk ditt vanlige bankkort — pengene kommer tilbake.</p>
-  <div class="stats">
-    <div class="stat">
-      <div class="stat-num">302 000</div>
-      <div class="stat-label">studenter i Norge</div>
+<div class="wls-wrap">
+
+  <nav class="wls-nav">
+    <a href="/" class="wls-nav-logo">
+      <svg width="36" height="30" viewBox="0 0 44 36" fill="none">
+        <circle cx="22" cy="7" r="5" fill="#1D9E75"/>
+        <circle cx="10" cy="28" r="4" fill="#185FA5"/>
+        <circle cx="34" cy="28" r="4" fill="#185FA5"/>
+        <path d="M22 12 Q8 18 10 24" stroke="#1D9E75" stroke-width="1.5" fill="none"/>
+        <path d="M22 12 Q36 18 34 24" stroke="#1D9E75" stroke-width="1.5" fill="none" stroke-dasharray="3 2"/>
+      </svg>
+      <span class="wls-nav-wordmark">WeLoveStudents</span>
+    </a>
+    <a href="#wls-interesse" class="wls-nav-cta">Meld interesse</a>
+  </nav>
+
+  <div class="wls-hero">
+    <div style="margin-bottom:1.5rem;">
+      <svg width="64" height="52" viewBox="0 0 44 36" fill="none">
+        <circle cx="22" cy="7" r="5" fill="#1D9E75"/>
+        <circle cx="10" cy="28" r="4" fill="#185FA5"/>
+        <circle cx="34" cy="28" r="4" fill="#185FA5"/>
+        <path d="M22 12 Q8 18 10 24" stroke="#1D9E75" stroke-width="1.5" fill="none"/>
+        <path d="M22 12 Q36 18 34 24" stroke="#1D9E75" stroke-width="1.5" fill="none" stroke-dasharray="3 2"/>
+      </svg>
     </div>
-    <div class="stat">
-      <div class="stat-num green">4–6×</div>
-      <div class="stat-label">kjøpekraft via familien</div>
+    <div class="wls-pill">Lanseres i Norge — 2025</div>
+    <h1>Studentrabatt — <em>automatisk</em>,<br>direkte på bankkortet</h1>
+    <p>WeLoveStudents gir studenter cashback hos partnerbutikker uten app-styr eller kuponger. Bruk ditt vanlige bankkort — pengene kommer tilbake.</p>
+    <div class="wls-stats">
+      <div class="wls-stat"><div class="wls-stat-num">302 000</div><div class="wls-stat-label">studenter i Norge</div></div>
+      <div class="wls-stat"><div class="wls-stat-num green">4–6×</div><div class="wls-stat-label">kjøpekraft via familien</div></div>
+      <div class="wls-stat"><div class="wls-stat-num">0 kr</div><div class="wls-stat-label">kostnad å starte</div></div>
     </div>
-    <div class="stat">
-      <div class="stat-num">0 kr</div>
-      <div class="stat-label">kostnad å starte</div>
-    </div>
-  </div>
-  <form class="email-form" onsubmit="submitHero(event)">
-    <input type="email" id="hero-email" placeholder="din@epost.no" required>
-    <button type="submit">Meld interesse</button>
-  </form>
-  <p class="form-note">For studenter og butikker — vi tar kontakt ved lansering.</p>
-  <p class="success" id="hero-success">✓ Takk! Vi tar kontakt snart.</p>
-</div>
-
-<hr>
-
-<!-- FOR BUTIKKER / STUDENTER -->
-<section>
-  <p class="section-eyebrow">Hvem er du?</p>
-  <h2 class="section-title">Slik fungerer WLS for deg</h2>
-  <p class="section-lead">WeLoveStudents fungerer for begge sider av bordet — uten ekstra innsats fra noen av dem.</p>
-
-  <div class="tabs">
-    <button class="tab active" onclick="switchTab('butikk', this)">Jeg er butikkeier</button>
-    <button class="tab" onclick="switchTab('student', this)">Jeg er student</button>
-  </div>
-
-  <div id="panel-butikk" class="panel active">
-    <div class="card-grid">
-      <div class="card">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </div>
-        <h3>302 000 studenter</h3>
-        <p>Bli synlig for alle norske studenter — og hele nettverket rundt dem. Ingen annen kanal gir deg denne rekkevidden.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon g">
-          <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-        </div>
-        <h3>Betaler kun for salg</h3>
-        <p>Ingen oppstartskostnad, ingen månedspris. WLS tar en avtalt prosent av faktisk WLS-generert omsetning — du betaler kun når du tjener.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        </div>
-        <h3>Geo-targeting</h3>
-        <p>Send push-tilbud til studenter, familie og venner som befinner seg i nærheten av butikken din — uten å bygge egen app.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-        </div>
-        <h3>Innsikt og analyse</h3>
-        <p>Se hvem som handler, hva de kjøper og når. Datadrevet synlighet inn i studentmassen — aldri hatt dette før.</p>
-      </div>
-      <div class="card wide">
-        <h3>Alumni-effekten 🎓</h3>
-        <p>Lojalitet bygd i studentårene varer livet ut. Etter studiene øker kjøpekraften med <span class="highlight">30–40 %</span> — og de tar med seg familien tilbake til deg. WLS-studenten går over til Alumni-tilbud tilpasset høyere inntekt, og du beholder relasjonen.</p>
-      </div>
-    </div>
-  </div>
-
-  <div id="panel-student" class="panel">
-    <div class="card-grid">
-      <div class="card">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-        </div>
-        <h3>Bruk ditt vanlige kort</h3>
-        <p>Ingen app å åpne ved kassen. Koble bankkortet én gang — cashback skjer automatisk når du handler hos partnerbutikker.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon g">
-          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        </div>
-        <h3>Hele familien hjelper</h3>
-        <p>Mor, far, onkel og venner kobler sine kort til din konto. Når de handler hos partnerbutikker, går cashbacken til deg.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon g">
-          <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-        </div>
-        <h3>Penger tilbake månedlig</h3>
-        <p>Cashback utbetales direkte til bankkontoen din, én gang i måneden. Ingen poeng, ingen kvoter, ingen utløpsdato.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        </div>
-        <h3>Lokale partnerbutikker</h3>
-        <p>Butikker nær campus — optikere, frisører, treningssentre, klinikker og mer. Alt du bruker til vanlig, med cashback tilbake.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<hr>
-
-<!-- SLIK FUNGERER DET -->
-<section>
-  <p class="section-eyebrow">Slik fungerer det</p>
-  <h2 class="section-title">Tre steg — så er du i gang</h2>
-  <p class="section-lead">For butikker tar det 20 minutter å komme i gang. For studenter enda mindre.</p>
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">1</div>
-      <div class="step-content">
-        <h3>Vi tar en kaffe</h3>
-        <p>Vi viser hvordan WLS fungerer og finner ut hvilke produkter og tjenester som passer best for studentmassen i ditt nærområde.</p>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <div class="step-content">
-        <h3>Enkel partneravtale</h3>
-        <p>Vi blir enige om prosent og oppstart. Ingen lock-in, ingen oppstartskostnad og ingen ny maskinvare. WLS leser kjøp via PSD2 Open Banking — dere fortsetter som før.</p>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <div class="step-content">
-        <h3>Dere er live</h3>
-        <p>Butikken din dukker opp i appen til studenter i nærområdet. WLS markedsfører lanseringen mot studenter — uten ekstra innsats fra deg.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<hr>
-
-<!-- DARK CTA -->
-<div class="cta-section" id="interesse">
-  <div class="cta-inner">
-    <div class="pill">Pilotfase pågår</div>
-    <h2>Vær klar fra dag én</h2>
-    <p>Vi velger ut partnere og studenter frem mot lansering. Meld interesse nå — vi tar kontakt personlig.</p>
-    <form class="email-form" onsubmit="submitCta(event)">
-      <input type="email" id="cta-email" placeholder="din@epost.no" required>
+    <form class="wls-email-form" action="https://api.web3forms.com/submit" method="POST" onsubmit="wlsShowSuccess('wls-hero-success')">
+      <input type="hidden" name="access_key" value="f8b67a7c-79b9-408c-a16d-8449a312bf64">
+      <input type="hidden" name="subject" value="Ny påmelding — WeLoveStudents">
+      <input type="hidden" name="from_name" value="WeLoveStudents">
+      <input type="hidden" name="redirect" value="https://we-love-students.vercel.app">
+      <input type="email" name="email" placeholder="din@epost.no" required>
       <button type="submit">Meld interesse</button>
     </form>
-    <p class="form-note">For studenter og butikker. Maks 20 minutter av din tid.</p>
-    <p class="success" id="cta-success">✓ Takk! Vi tar kontakt snart.</p>
+    <p class="wls-form-note">For studenter og butikker — vi tar kontakt ved lansering.</p>
+    <p class="wls-success" id="wls-hero-success">✓ Takk! Vi tar kontakt snart.</p>
   </div>
-</div>
 
-<!-- CONTACT -->
-<div class="contact">
-  <p>Spørsmål? Ta kontakt direkte med Philip Borresen, grunnlegger WeLoveStudents.<br>
-  <a href="mailto:philipborre@gmail.com">philipborre@gmail.com</a> &nbsp;·&nbsp; <a href="https://welovestudents.com">welovestudents.com</a></p>
-</div>
+  <hr class="wls-hr">
 
-<!-- FOOTER -->
-<footer>
-  © 2025 WeLoveStudents · Oslo, Norge
-</footer>
+  <div class="wls-section">
+    <p class="wls-eyebrow">Hvem er du?</p>
+    <h2 class="wls-section-title">Slik fungerer WLS for deg</h2>
+    <p class="wls-section-lead">WeLoveStudents fungerer for begge sider av bordet — uten ekstra innsats fra noen av dem.</p>
+    <div class="wls-tabs">
+      <button class="wls-tab active" onclick="wlsTab('butikk',this)">Jeg er butikkeier</button>
+      <button class="wls-tab" onclick="wlsTab('student',this)">Jeg er student</button>
+    </div>
+    <div id="wls-panel-butikk" class="wls-panel active">
+      <div class="wls-card-grid">
+        <div class="wls-card">
+          <div class="wls-card-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <h3>302 000 studenter</h3>
+          <p>Bli synlig for alle norske studenter — og hele nettverket rundt dem. Ingen annen kanal gir deg denne rekkevidden.</p>
+        </div>
+        <div class="wls-card">
+          <div class="wls-card-icon g"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <h3>Betaler kun for salg</h3>
+          <p>Ingen oppstartskostnad, ingen månedspris. WLS tar en avtalt prosent av faktisk WLS-generert omsetning — du betaler kun når du tjener.</p>
+        </div>
+        <div class="wls-card">
+          <div class="wls-card-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <h3>Geo-targeting</h3>
+          <p>Send push-tilbud til studenter, familie og venner som befinner seg i nærheten av butikken din — uten å bygge egen app.</p>
+        </div>
+        <div class="wls-card">
+          <div class="wls-card-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <h3>Innsikt og analyse</h3>
+          <p>Se hvem som handler, hva de kjøper og når. Datadrevet synlighet inn i studentmassen — aldri hatt dette før.</p>
+        </div>
+        <div class="wls-card wide">
+          <h3>Alumni-effekten</h3>
+          <p>Lojalitet bygd i studentårene varer livet ut. Etter studiene øker kjøpekraften med <span class="wls-highlight">30–40 %</span> — og de tar med seg familien tilbake til deg. WLS-studenten går over til Alumni-tilbud tilpasset høyere inntekt, og du beholder relasjonen.</p>
+        </div>
+      </div>
+    </div>
+    <div id="wls-panel-student" class="wls-panel">
+      <div class="wls-card-grid">
+        <div class="wls-card">
+          <div class="wls-card-icon"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+          <h3>Bruk ditt vanlige kort</h3>
+          <p>Ingen app å åpne ved kassen. Koble bankkortet én gang — cashback skjer automatisk når du handler hos partnerbutikker.</p>
+        </div>
+        <div class="wls-card">
+          <div class="wls-card-icon g"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+          <h3>Hele familien hjelper</h3>
+          <p>Mor, far, onkel og venner kobler sine kort til din konto. Når de handler hos partnerbutikker, går cashbacken til deg.</p>
+        </div>
+        <div class="wls-card">
+          <div class="wls-card-icon g"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <h3>Penger tilbake månedlig</h3>
+          <p>Cashback utbetales direkte til bankkontoen din, én gang i måneden. Ingen poeng, ingen kvoter, ingen utløpsdato.</p>
+        </div>
+        <div class="wls-card">
+          <div class="wls-card-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <h3>Lokale partnerbutikker</h3>
+          <p>Butikker nær campus — optikere, frisører, treningssentre, klinikker og mer. Alt du bruker til vanlig, med cashback tilbake.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="wls-hr">
+
+  <div class="wls-section">
+    <p class="wls-eyebrow">Slik fungerer det</p>
+    <h2 class="wls-section-title">Tre steg — så er du i gang</h2>
+    <p class="wls-section-lead">For butikker tar det 20 minutter å komme i gang. For studenter enda mindre.</p>
+    <div class="wls-steps">
+      <div class="wls-step">
+        <div class="wls-step-num">1</div>
+        <div class="wls-step-content">
+          <h3>Vi tar en kaffe</h3>
+          <p>Vi viser hvordan WLS fungerer og finner ut hvilke produkter og tjenester som passer best for studentmassen i ditt nærområde.</p>
+        </div>
+      </div>
+      <div class="wls-step">
+        <div class="wls-step-num">2</div>
+        <div class="wls-step-content">
+          <h3>Enkel partneravtale</h3>
+          <p>Vi blir enige om prosent og oppstart. Ingen lock-in, ingen oppstartskostnad og ingen ny maskinvare. WLS leser kjøp via PSD2 Open Banking — dere fortsetter som før.</p>
+        </div>
+      </div>
+      <div class="wls-step">
+        <div class="wls-step-num">3</div>
+        <div class="wls-step-content">
+          <h3>Dere er live</h3>
+          <p>Butikken din dukker opp i appen til studenter i nærområdet. WLS markedsfører lanseringen mot studenter — uten ekstra innsats fra deg.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="wls-hr">
+
+  <div class="wls-cta-section" id="wls-interesse">
+    <div class="wls-cta-inner">
+      <div class="wls-pill">Pilotfase pågår</div>
+      <h2>Vær klar fra dag én</h2>
+      <p>Vi velger ut partnere og studenter frem mot lansering. Meld interesse nå — vi tar kontakt personlig.</p>
+      <form class="wls-email-form" onsubmit="wlsSubmitCta(event)">
+        <input type="email" id="wls-cta-email" placeholder="din@epost.no" required>
+        <button type="submit">Meld interesse</button>
+      </form>
+      <p class="wls-form-note">For studenter og butikker. Maks 20 minutter av din tid.</p>
+      <p class="wls-success" id="wls-cta-success">✓ Takk! Vi tar kontakt snart.</p>
+    </div>
+  </div>
+
+  <div class="wls-contact">
+    <p>Spørsmål? Ta kontakt direkte med Philip Borresen, grunnlegger WeLoveStudents.<br>
+    <a href="mailto:philipborre@gmail.com">philipborre@gmail.com</a> &nbsp;·&nbsp; <a href="https://welovestudents.com">welovestudents.com</a></p>
+  </div>
+
+  <footer class="wls-footer">© 2025 WeLoveStudents · Oslo, Norge</footer>
+
+</div>
 
 <script>
-  function switchTab(tab, btn) {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('panel-' + tab).classList.add('active');
-  }
-
-  function submitHero(e) {
-    e.preventDefault();
-    document.getElementById('hero-success').style.display = 'block';
-    document.getElementById('hero-email').value = '';
-  }
-
-  function submitCta(e) {
-    e.preventDefault();
-    document.getElementById('cta-success').style.display = 'block';
-    document.getElementById('cta-email').value = '';
-  }
+function wlsTab(tab, btn) {
+  document.querySelectorAll('.wls-tab').forEach(function(t){ t.classList.remove('active'); });
+  document.querySelectorAll('.wls-panel').forEach(function(p){ p.classList.remove('active'); });
+  btn.classList.add('active');
+  document.getElementById('wls-panel-' + tab).classList.add('active');
+}
+function wlsSubmitHero(e) {
+  e.preventDefault();
+  document.getElementById('wls-hero-success').style.display = 'block';
+  document.getElementById('wls-hero-email').value = '';
+}
+function wlsSubmitCta(e) {
+  e.preventDefault();
+  document.getElementById('wls-cta-success').style.display = 'block';
+  document.getElementById('wls-cta-email').value = '';
+}
 </script>
-</body>
-</html>
